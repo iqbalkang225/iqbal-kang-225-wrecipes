@@ -1,4 +1,15 @@
 <main class="grid lg:grid-cols-[2fr,4fr] gap-6 mt-6 pb-6">
-  <app-recipes-list></app-recipes-list>
-  <app-recipe-details></app-recipe-details>
+  <app-recipes-list (onRecipeSelectCustomEvent)="onRecipeSelect($event)">
+  </app-recipes-list>
+
+  <app-recipe-details
+    [selectedRecipe]="currentlySelectedRecipe"
+    *ngIf="currentlySelectedRecipe; else noRecipeSelectedText"
+  >
+  </app-recipe-details>
+  <ng-template #noRecipeSelectedText>
+    <div class="border flex justify-center items-center rounded-3xl">
+      <p>Please select a recipe to see the details.</p>
+    </div>
+  </ng-template>
 </main>

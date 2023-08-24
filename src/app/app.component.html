@@ -1,4 +1,7 @@
 <div class="max-w-7xl w-[95%] mx-auto font-fraunces text-gray-600">
-  <app-header></app-header>
-  <app-recipes></app-recipes>
+  <app-header (pageSelectCustomEvent)="onSelect($event)"></app-header>
+  <app-recipes *ngIf="selectedPage === 'recipes'"></app-recipes>
+  <app-shopping-list
+    *ngIf="selectedPage === 'shopping-list'"
+  ></app-shopping-list>
 </div>

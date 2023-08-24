@@ -1,0 +1,19 @@
+<div class="grid md:grid-cols-[1fr,0.65fr] md:gap-12 lg:gap-36 my-4 pb-4">
+  <!-- ingredients shopping list -->
+  <div>
+    <!-- ingredients heading -->
+
+    <h3 class="text-xl font-semibold capitalize">ingredients</h3>
+
+    <!-- ingredients list -->
+    <ul class="divide-y-2">
+      <app-shopping-item *ngFor="let ing of ingredients" [ingredient]="ing">
+      </app-shopping-item>
+    </ul>
+  </div>
+
+  <!-- shopping list form component -->
+  <app-shopping-form
+    (ingredientAddCustomEvent)="onIngredientAdd($event)"
+  ></app-shopping-form>
+</div>

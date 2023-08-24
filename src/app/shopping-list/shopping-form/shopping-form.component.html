@@ -1,0 +1,26 @@
+<!-- shopping list form -->
+<form class="space-y-8 mt-12">
+  <input
+    type="text"
+    placeholder="Name"
+    class="border-b border-accent p-1 outline-none w-full"
+    #ingredientNameInput
+  />
+  <input
+    type="text"
+    placeholder="Amount"
+    class="border-b border-accent p-1 outline-none w-full"
+    #ingredientAmountInput
+  />
+
+  <!-- buttons -->
+  <div class="flex flex-wrap justify-center gap-x-6 gap-y-4 my-4">
+    <button
+      class="border border-black px-6 py-4 flex gap-2 capitalize rounded-full hover:text-black hover:scale-95 duration-200"
+      (click)="onIngredientAdd()"
+    >
+      <mat-icon>add_circle_outline</mat-icon>
+      add to shopping list
+    </button>
+  </div>
+</form>

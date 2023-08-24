@@ -12,31 +12,11 @@
   </div>
 
   <!-- recipes list -->
-  <div class="mt-4 lg:space-y-2 grid sm:grid-cols-2 gap-2 lg:block">
-    <!-- ===========delete later========== -->
-    <div
-      class="bg-black text-white flex gap-4 items-center p-2 rounded-3xl group hover:bg-gray-900 duration-200 cursor-pointer"
+  <div class="mt-4 grid sm:grid-cols-2 gap-2 lg:grid-cols-1">
+    <app-recipe-item
       *ngFor="let recipe of recipes"
-    >
-      <!-- recipe image -->
-      <img
-        [src]="recipe.getImage"
-        class="w-16 h-16 rounded-full bg-accent-light"
-      />
-
-      <!-- recipe text -->
-      <div class="flex-1">
-        <h3 class="capitalize group-hover:text-accent">{{ recipe.getName }}</h3>
-        <div class="flex items-center text-gray-300 text-xs gap-20">
-          <p>4 ingredients</p>
-          <p class="flex items-center">
-            <mat-icon class="text-base">schedule</mat-icon> 30 min
-          </p>
-        </div>
-      </div>
-    </div>
-    <!-- ========delete later========= -->
+      [currentRecipe]="recipe"
+      (onRecipeSelectCustomEvent)="onRecipeSelect(recipe)"
+    ></app-recipe-item>
   </div>
 </aside>
-
-<!-- <app-recipe-item></app-recipe-item> -->
