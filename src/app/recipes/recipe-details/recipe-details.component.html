@@ -8,5 +8,93 @@
     />
   </div>
 
-  <!-- recipe heading and description -->
+  <!-- recipe heading, description and ingredients -->
+  <div class="px-6">
+    <!-- recipe heading -->
+    <div
+      class="grid grid-cols-[min-content,1fr,min-content] justify-items-center py-4"
+    >
+      <div></div>
+      <h2 class="text-2xl capitalize font-semibold">lean ground beef</h2>
+
+      <!-- recipe manage icons -->
+      <div class="justify-self-end flex gap-1">
+        <button
+          class="hover:scale-90 text-accent duration-100 hover:text-inherit"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          class="hover:scale-90 text-accent duration-100 hover:text-inherit"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- recipe description -->
+    <p>
+      Et pariatur et ullamco sit sunt dolore do quis commodo dolor mollit
+      occaecat dolore eu officia. Id veniam cillum duis tempor irure laboris sit
+      aliquip. Ut qui velit nulla laborum consequat sit. Commodo id anim laborum
+      consequat incididunt eu proident nulla nostrud sit consectetur excepteur.
+      Consequat sint elit occaecat irure sint ullamco culpa. Cillum non pariatur
+      sint ullamco ea veniam fugiat et velit exercitation esse sint duis. Irure
+      ullamco labore culpa consequat nulla duis pariatur laborum dolore. Laborum
+      cillum ipsum consequat ullamco reprehenderit deserunt ad ea amet ex irure
+      et veniam.
+    </p>
+
+    <!-- ingredients container -->
+    <div class="my-4">
+      <!-- ingredients heading -->
+      <div class="flex justify-between">
+        <h3 class="text-xl font-semibold capitalize">ingredients</h3>
+        <!-- select all button -->
+        <button class="flex capitalize gap-1">
+          <mat-icon class="text-accent">check_circle_outline</mat-icon>
+          select all
+        </button>
+      </div>
+
+      <!-- ingredients list -->
+      <ul class="divide-y-2">
+        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
+          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2
+          tomatoes
+        </li>
+        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
+          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2 onions
+        </li>
+        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
+          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2 lean
+          beef
+        </li>
+        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
+          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2
+          chicken
+        </li>
+        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
+          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2
+          tomatoes
+        </li>
+      </ul>
+
+      <!-- buttons -->
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-4 my-4">
+        <button
+          class="border border-black px-6 py-4 flex gap-2 capitalize rounded-full hover:text-black hover:scale-95 duration-200"
+        >
+          <mat-icon>add_circle_outline</mat-icon>
+          add to shopping list
+        </button>
+        <button
+          class="border border-black px-6 py-4 flex gap-2 capitalize rounded-full hover:text-black hover:scale-95 duration-200"
+        >
+          <mat-icon>shopping_cart</mat-icon>
+          view shopping list
+        </button>
+      </div>
+    </div>
+  </div>
 </section>

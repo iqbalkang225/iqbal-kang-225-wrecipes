@@ -4,7 +4,7 @@
     <h2 class="font-semibold text-2xl capitalize">recipes</h2>
 
     <button
-      class="border border-black px-6 py-2 flex gap-2 capitalize rounded-full"
+      class="border border-black px-6 py-2 flex gap-2 capitalize rounded-full hover:text-black hover:scale-95 duration-200"
     >
       <mat-icon>add_circle_outline</mat-icon>
       add new recipe
@@ -12,10 +12,10 @@
   </div>
 
   <!-- recipes list -->
-  <div class="mt-4 space-y-2">
+  <div class="mt-4 lg:space-y-2 grid sm:grid-cols-2 gap-2 lg:block">
     <!-- ===========delete later========== -->
     <div
-      class="bg-black text-white flex gap-4 items-center p-2 rounded-3xl"
+      class="bg-black text-white flex gap-4 items-center p-2 rounded-3xl group hover:bg-gray-900 duration-200 cursor-pointer"
       *ngFor="let recipe of recipes"
     >
       <!-- recipe image -->
@@ -26,7 +26,7 @@
 
       <!-- recipe text -->
       <div class="flex-1">
-        <h3 class="capitalize">{{ recipe.getName }}</h3>
+        <h3 class="capitalize group-hover:text-accent">{{ recipe.getName }}</h3>
         <div class="flex items-center text-gray-300 text-xs gap-20">
           <p>4 ingredients</p>
           <p class="flex items-center">
