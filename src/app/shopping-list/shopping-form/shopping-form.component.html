@@ -7,7 +7,7 @@
     #ingredientNameInput
   />
   <input
-    type="text"
+    type="number"
     placeholder="Amount"
     class="border-b border-accent p-1 outline-none w-full"
     #ingredientAmountInput
@@ -17,7 +17,7 @@
   <div class="flex flex-wrap justify-center gap-x-6 gap-y-4 my-4">
     <button
       class="border border-black px-6 py-4 flex gap-2 capitalize rounded-full hover:text-black hover:scale-95 duration-200"
-      (click)="onIngredientAdd()"
+      (click)="onIngAdd()"
     >
       <mat-icon>add_circle_outline</mat-icon>
       add to shopping list
