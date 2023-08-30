@@ -1,10 +1,20 @@
 <nav class="grid grid-cols-3 items-center my-6">
   <ul class="flex gap-12 capitalize">
     <li>
-      <a href="#" (click)="onSelect('recipes')">recipes</a>
+      <a
+        routerLink="recipes/1"
+        routerLinkActive="text-accent"
+        class="hover:text-accent duration-200"
+        >recipes</a
+      >
     </li>
     <li>
-      <a href="#" (click)="onSelect('shopping-list')">shopping list</a>
+      <a
+        routerLink="shopping-list"
+        routerLinkActive="text-accent"
+        class="hover:text-accent duration-200"
+        >shopping list</a
+      >
     </li>
   </ul>
 

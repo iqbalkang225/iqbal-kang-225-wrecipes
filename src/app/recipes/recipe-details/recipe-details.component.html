@@ -22,6 +22,7 @@
       <!-- recipe manage icons -->
       <div class="justify-self-end flex gap-1">
         <button
+          routerLink="edit"
           class="hover:scale-90 text-accent duration-100 hover:text-inherit"
         >
           <mat-icon>edit</mat-icon>
@@ -53,32 +54,38 @@
       <div class="flex justify-between">
         <h3 class="text-xl font-semibold capitalize">ingredients</h3>
         <!-- select all button -->
-        <button class="flex capitalize gap-1">
-          <mat-icon class="text-accent">check_circle_outline</mat-icon>
+        <button
+          class="flex capitalize gap-1"
+          *ngIf="!allSelected; else deSelectAllBtn"
+          (click)="selectAll()"
+        >
+          <mat-icon class="text-accent">radio_button_unchecked</mat-icon>
           select all
         </button>
+        <ng-template #deSelectAllBtn>
+          <button class="flex capitalize gap-1" (click)="deSelectAll()">
+            <mat-icon class="text-accent">check_circle_outline</mat-icon>
+            deselect all
+          </button>
+        </ng-template>
       </div>
 
       <!-- ingredients list -->
       <ul class="divide-y-2">
-        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
-          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2
-          tomatoes
-        </li>
-        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
-          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2 onions
-        </li>
-        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
-          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2 lean
-          beef
-        </li>
-        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
-          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2
-          chicken
-        </li>
-        <li class="flex gap-2 py-3 cursor-pointer hover:text-black">
-          <mat-icon class="text-accent">check_circle_outline</mat-icon> 2
-          tomatoes
+        <li
+          class="flex gap-2 py-3 capitalize cursor-pointer hover:text-black"
+          *ngFor="let ingredient of selectedRecipe.getIngredients"
+          (click)="toggleIngredient(ingredient)"
+        >
+          <mat-icon
+            class="text-accent"
+            *ngIf="!ingredient.inShoppingList; else checkedIcon"
+            >radio_button_unchecked</mat-icon
+          >
+          <ng-template #checkedIcon>
+            <mat-icon class="text-accent">check_circle_outline</mat-icon>
+          </ng-template>
+          {{ ingredient.name }} ({{ ingredient.amount }})
         </li>
       </ul>
 
@@ -86,6 +93,7 @@
       <div class="flex flex-wrap justify-center gap-x-6 gap-y-4 my-4">
         <button
           class="border border-black px-6 py-4 flex gap-2 capitalize rounded-full hover:text-black hover:scale-95 duration-200"
+          (click)="addToShoppingList()"
         >
           <mat-icon>add_circle_outline</mat-icon>
           add to shopping list
