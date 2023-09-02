@@ -6,7 +6,7 @@ export class Ingredient {
   constructor(name: string, amount: number, inShoppingList?: boolean) {
     this.name = name;
     this.amount = amount;
-    this.inShoppingList = inShoppingList;
+    this.inShoppingList = inShoppingList || null;
   }
 
   get getName() {

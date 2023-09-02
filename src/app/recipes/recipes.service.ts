@@ -88,6 +88,6 @@ export class RecipesService {
   }
 
   getSingleRecipe(id: number) {
-    return this.recipes.find((recipe: Recipe) => recipe.getId === id);
+    return this.recipes.find((recipe: Recipe) => recipe.getId === +id);
   }
 }

@@ -1,4 +1,5 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
 
 @Injectable({
@@ -15,7 +16,8 @@ export class ShoppingListService {
     new Ingredient('peach', 11),
   ];
 
-  updatedIngredients = new EventEmitter<Ingredient[]>();
+  updatedIngredients = new Subject<Ingredient[]>();
+  editIngredintIndex = new Subject<number>();
 
   get getIngredients() {
     return [...this.ingredients];
@@ -23,7 +25,7 @@ export class ShoppingListService {
 
   onIngredientAdd(ingredient: Ingredient) {
     this.checkIfIngredientPresentAndUpdate(ingredient);
-    this.updatedIngredients.emit(this.getIngredients);
+    this.updatedIngredients.next(this.getIngredients);
   }
 
   onIngredientsAddFromDetails(ings: Ingredient[]) {
@@ -43,5 +45,19 @@ export class ShoppingListService {
     // if ingredient is already there then increase the already present ingredient amount
     this.ingredients[index].setAmount =
       this.ingredients[index].getAmount + ing.getAmount;
+  }
+
+  getSingleIngredient(index: number) {
+    return this.ingredients[index];
+  }
+
+  onEditIngredient(index: number, ingredient: Ingredient) {
+    this.ingredients[index] = ingredient;
+    this.updatedIngredients.next(this.getIngredients);
+  }
+
+  onDeleteIngredient(index: number) {
+    this.ingredients.splice(index, 1);
+    this.updatedIngredients.next(this.getIngredients);
   }
 }

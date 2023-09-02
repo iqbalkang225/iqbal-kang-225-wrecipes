@@ -1,1 +1,74 @@
-<p>recipe-form works!</p>
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+  <!-- buttons -->
+  <div class="flex flex-wrap justify-end items-center gap-x-6 gap-y-4">
+    <button
+      [disabled]="!recipeForm.valid"
+      class="border border-black px-6 py-2 flex gap-2 capitalize rounded-full hover:text-black hover:scale-95 duration-200 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed"
+    >
+      <mat-icon>save</mat-icon>
+      save
+    </button>
+    <button
+      type="button"
+      class="border border-black px-6 py-2 flex gap-2 capitalize rounded-full hover:text-black hover:scale-95 duration-200"
+    >
+      <mat-icon>close</mat-icon>
+      cancel
+    </button>
+  </div>
+  <!-- inputs -->
+  <div class="space-y-8 my-8">
+    <input
+      type="text"
+      placeholder="Name"
+      class="border-b border-accent p-1 outline-none w-full"
+      formControlName="name"
+    />
+
+    <input
+      type="text"
+      placeholder="Image Url"
+      class="border-b border-accent p-1 outline-none w-full"
+      formControlName="imageUrl"
+    />
+
+    <textarea
+      rows="6"
+      class="border-b border-accent p-1 outline-none w-full"
+      placeholder="Recipe description"
+      formControlName="description"
+    ></textarea>
+  </div>
+  <!-- ingredients inputs -->
+  <div formArrayName="ingredients">
+    <div class="flex justify-between">
+      <h3 class="text-xl font-semibold capitalize">add ingredients</h3>
+      <button
+        type="button"
+        (click)="onIngredientAdd()"
+        class="bg-accent shadow-lg shadow-black/30 text-white h-8 w-8 flex justify-center items-center rounded-full hover:scale-95 duration-200 hover:shadow-md"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div
+      class="flex gap-4 mt-6 items-end"
+      *ngFor="let ingredientControl of controls; let idx = index"
+      [formGroupName]="idx"
+    >
+      <input
+        type="text"
+        placeholder="Ingredient Name"
+        class="border-b border-accent p-1 outline-none"
+        formControlName="ingredientName"
+      />
+      <input
+        type="number"
+        placeholder="Amount"
+        class="border-b border-accent p-1 outline-none w-24"
+        formControlName="ingredientAmount"
+      />
+      <mat-icon class="text-accent text-[20px]">delete</mat-icon>
+    </div>
+  </div>
+</form>

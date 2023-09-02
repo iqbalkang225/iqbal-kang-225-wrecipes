@@ -6,8 +6,12 @@
     <h3 class="text-xl font-semibold capitalize">ingredients</h3>
 
     <!-- ingredients list -->
-    <ul class="divide-y-2">
-      <app-shopping-item *ngFor="let ing of ingredients" [ingredient]="ing">
+    <ul class="divide-y-2 mt-4">
+      <app-shopping-item
+        *ngFor="let ing of ingredients; let idx = index"
+        [index]="idx"
+        [ingredient]="ing"
+      >
       </app-shopping-item>
     </ul>
   </div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -32,7 +32,13 @@ import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component
     ShoppingItemComponent,
     RecipeFormComponent,
   ],
-  imports: [BrowserModule, MatIconModule, FormsModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    MatIconModule,
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
