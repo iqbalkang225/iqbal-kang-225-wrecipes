@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
@@ -10,7 +10,7 @@ import { RecipesService } from '../recipes.service';
   templateUrl: './recipe-details.component.html',
   styleUrls: ['./recipe-details.component.css'],
 })
-export class RecipeDetailsComponent implements OnInit {
+export class RecipeDetailsComponent implements OnInit, OnDestroy {
   selectedRecipe: Recipe;
   allSelected = false;
 
@@ -27,6 +27,10 @@ export class RecipeDetailsComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.selectedRecipe = this.recipesService.getSingleRecipe(+params.id);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.deSelectAll();
   }
 
   selectAll() {
@@ -57,6 +61,12 @@ export class RecipeDetailsComponent implements OnInit {
     const selectedIngrdients = this.selectedRecipe.getIngredients.filter(
       (ing) => ing.getInShoppingList === true
     );
+
     this.shoppingListService.onIngredientsAddFromDetails(selectedIngrdients);
+    this.deSelectAll();
+  }
+
+  onDelete() {
+    this.recipesService.deleteRecipe(this.selectedRecipe.getId);
   }
 }

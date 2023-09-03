@@ -1,4 +1,4 @@
-<aside>
+<aside class="flex flex-col overflow-hidden max-h-screen">
   <!-- recipes list heading and button -->
   <div class="flex justify-between items-center">
     <h2 class="font-semibold text-2xl capitalize">recipes</h2>
@@ -13,7 +13,8 @@
   </div>
 
   <!-- recipes list -->
-  <div class="mt-4 grid sm:grid-cols-2 gap-2 lg:grid-cols-1">
+
+  <div class="mt-4 grid sm:grid-cols-2 gap-2 lg:grid-cols-1 overflow-y-auto">
     <app-recipe-item
       *ngFor="let recipe of recipes"
       [currentRecipe]="recipe"

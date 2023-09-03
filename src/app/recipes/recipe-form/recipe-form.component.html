@@ -1,4 +1,8 @@
-<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+<form
+  [formGroup]="recipeForm"
+  (ngSubmit)="onSubmit()"
+  class="max-h-screen overflow-y-scroll"
+>
   <!-- buttons -->
   <div class="flex flex-wrap justify-end items-center gap-x-6 gap-y-4">
     <button
@@ -9,6 +13,7 @@
       save
     </button>
     <button
+      (click)="onCancel()"
       type="button"
       class="border border-black px-6 py-2 flex gap-2 capitalize rounded-full hover:text-black hover:scale-95 duration-200"
     >
@@ -29,8 +34,17 @@
       type="text"
       placeholder="Image Url"
       class="border-b border-accent p-1 outline-none w-full"
-      formControlName="imageUrl"
+      formControlName="image"
+      #imageInput
     />
+
+    <div class="h-60 rounded-2xl overflow-hidden" *ngIf="imageInput.value">
+      <img
+        [src]="imageInput.value"
+        alt="recipe-image"
+        class="h-full w-full object-cover"
+      />
+    </div>
 
     <textarea
       rows="6"
@@ -60,13 +74,13 @@
         type="text"
         placeholder="Ingredient Name"
         class="border-b border-accent p-1 outline-none"
-        formControlName="ingredientName"
+        formControlName="name"
       />
       <input
         type="number"
         placeholder="Amount"
         class="border-b border-accent p-1 outline-none w-24"
-        formControlName="ingredientAmount"
+        formControlName="amount"
       />
       <mat-icon class="text-accent text-[20px]">delete</mat-icon>
     </div>

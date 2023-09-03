@@ -1,8 +1,8 @@
-<section>
+<section class="h-screen overflow-scroll">
   <!-- recipe image -->
   <div class="rounded-3xl overflow-hidden border h-80">
     <img
-      src="https://www.harmonsgrocery.com/app/uploads/2020/09/Traditional_Turkey_Meal.jpg"
+      [src]="selectedRecipe.getImage"
       alt="recipe-image"
       class="w-full object-cover"
     />
@@ -28,6 +28,7 @@
           <mat-icon>edit</mat-icon>
         </button>
         <button
+          (click)="onDelete()"
           class="hover:scale-90 text-accent duration-100 hover:text-inherit"
         >
           <mat-icon>delete</mat-icon>
@@ -37,15 +38,7 @@
 
     <!-- recipe description -->
     <p>
-      Et pariatur et ullamco sit sunt dolore do quis commodo dolor mollit
-      occaecat dolore eu officia. Id veniam cillum duis tempor irure laboris sit
-      aliquip. Ut qui velit nulla laborum consequat sit. Commodo id anim laborum
-      consequat incididunt eu proident nulla nostrud sit consectetur excepteur.
-      Consequat sint elit occaecat irure sint ullamco culpa. Cillum non pariatur
-      sint ullamco ea veniam fugiat et velit exercitation esse sint duis. Irure
-      ullamco labore culpa consequat nulla duis pariatur laborum dolore. Laborum
-      cillum ipsum consequat ullamco reprehenderit deserunt ad ea amet ex irure
-      et veniam.
+      {{ selectedRecipe.getDescription }}
     </p>
 
     <!-- ingredients container -->

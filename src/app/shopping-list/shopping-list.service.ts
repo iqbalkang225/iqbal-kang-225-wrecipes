@@ -6,15 +6,7 @@ import { Ingredient } from '../shared/ingredient.model';
   providedIn: 'root',
 })
 export class ShoppingListService {
-  private ingredients: Ingredient[] = [
-    new Ingredient('apple', 5),
-    new Ingredient('orange', 2),
-    new Ingredient('mango', 12),
-    new Ingredient('tomato', 3),
-    new Ingredient('kiwi', 6),
-    new Ingredient('banana', 9),
-    new Ingredient('peach', 11),
-  ];
+  private ingredients: Ingredient[] = [];
 
   updatedIngredients = new Subject<Ingredient[]>();
   editIngredintIndex = new Subject<number>();

@@ -1,6 +1,10 @@
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
 import { Recipe } from './recipe.model';
 
+@Injectable()
 export class RecipesService {
   private recipes: Recipe[] = [
     new Recipe(
@@ -83,11 +87,70 @@ export class RecipesService {
     ),
   ];
 
+  constructor(private router: Router) {}
+
+  recipiesChanged = new Subject<Recipe[]>();
+
   get getRecipes() {
     return [...this.recipes];
   }
 
   getSingleRecipe(id: number) {
+    console.log(
+      this.recipes.find((recipe: Recipe) => recipe.getId === +id)
+        .getIngredients[0]
+    );
     return this.recipes.find((recipe: Recipe) => recipe.getId === +id);
+  }
+
+  addRecipe(recipe) {
+    const id = this.recipes.length + 1;
+    const newRecipe = this.makeRecipeObject(recipe, id);
+
+    this.recipes.push(newRecipe);
+    this.recipiesChanged.next(this.getRecipes);
+  }
+
+  updateRecipe(index: number, recipe: Recipe) {
+    const newRecipe = this.makeRecipeObject(recipe, index);
+
+    this.recipes[index - 1] = newRecipe;
+    this.recipiesChanged.next(this.getRecipes);
+  }
+
+  makeRecipeObject(recipe, id) {
+    const { name, image, description, ingredients } = recipe;
+
+    const ingredientsArr = this.makeIngredientsObject(ingredients);
+    return new Recipe(+id, name, description, image, ingredientsArr);
+  }
+
+  makeIngredientsObject(ingredients) {
+    const ingredientArr = [];
+    for (let ingredient of ingredients) {
+      const { name, amount } = ingredient;
+
+      ingredientArr.push(new Ingredient(name, amount));
+    }
+    return ingredientArr;
+  }
+
+  deleteRecipe(index: number) {
+    this.recipes = this.recipes.filter(
+      (recipe: Recipe) => recipe.getId !== index
+    );
+    this.recipiesChanged.next(this.getRecipes);
+    this.homePageRecipe();
+  }
+
+  homePageRecipe() {
+    const totalRecipes = this.totalRecipes();
+    if (totalRecipes > 0)
+      return this.router.navigate(['recipes', this.recipes[0].getId]);
+    else this.router.navigate(['recipes']);
+  }
+
+  totalRecipes() {
+    return this.recipes.length;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { RecipesService } from '../recipes.service';
 
@@ -15,6 +15,7 @@ export class RecipeFormComponent implements OnInit {
   recipeForm: FormGroup;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private recipesService: RecipesService
   ) {}
@@ -28,7 +29,7 @@ export class RecipeFormComponent implements OnInit {
 
   private initForm() {
     let name = '';
-    let imageUrl = '';
+    let image = '';
     let description = '';
     let recipeIngredients = new FormArray([]);
 
@@ -36,7 +37,7 @@ export class RecipeFormComponent implements OnInit {
       const recipe = this.recipesService.getSingleRecipe(this.id);
 
       name = recipe.getName;
-      imageUrl = recipe.getImage;
+      image = recipe.getImage;
       description = recipe.getDescription;
 
       if (!recipe?.getIngredients) return;
@@ -44,11 +45,8 @@ export class RecipeFormComponent implements OnInit {
       recipe.getIngredients.forEach((ingredient: Ingredient) => {
         recipeIngredients.push(
           new FormGroup({
-            ingredientName: new FormControl(
-              ingredient.getName,
-              Validators.required
-            ),
-            ingredientAmount: new FormControl(ingredient.getAmount, [
+            name: new FormControl(ingredient.getName, Validators.required),
+            amount: new FormControl(ingredient.getAmount, [
               Validators.required,
               Validators.min(1),
             ]),
@@ -59,7 +57,7 @@ export class RecipeFormComponent implements OnInit {
 
     this.recipeForm = new FormGroup({
       name: new FormControl(name, Validators.required),
-      imageUrl: new FormControl(imageUrl, Validators.required),
+      image: new FormControl(image, Validators.required),
       description: new FormControl(description, Validators.required),
       ingredients: recipeIngredients,
     });
@@ -72,16 +70,26 @@ export class RecipeFormComponent implements OnInit {
   onIngredientAdd() {
     (<FormArray>this.recipeForm.get('ingredients')).push(
       new FormGroup({
-        ingredientName: new FormControl(null, Validators.required),
-        ingredientAmount: new FormControl(null, [
-          Validators.required,
-          Validators.min(1),
-        ]),
+        name: new FormControl(null, Validators.required),
+        amount: new FormControl(null, [Validators.required, Validators.min(1)]),
       })
     );
   }
 
   onSubmit() {
-    console.log(this.recipeForm);
+    const newRecipe = this.recipeForm.value;
+
+    if (this.isEditing) this.recipesService.updateRecipe(this.id, newRecipe);
+    else this.recipesService.addRecipe(newRecipe);
+  }
+
+  onCancel() {
+    let path;
+    const totalRecipes = this.recipesService.totalRecipes();
+    if (totalRecipes > 0) path = this.recipesService.getRecipes[0].getId;
+    else path = 'empty';
+
+    this.isEditing = false;
+    this.router.navigate(['recipes', this.id || path]);
   }
 }

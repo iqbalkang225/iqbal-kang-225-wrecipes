@@ -40,4 +40,8 @@ export class Recipe {
   get getIngredients() {
     return this.ingredients;
   }
+
+  set setId(id: number) {
+    this.id = id;
+  }
 }

@@ -1,0 +1,11 @@
+<section class="flex flex-col h-full min-h-screen">
+  <h2 class="text-center capitalize font-bold">
+    <span *ngIf="totalRecipes > 0">
+      please select a recipe from the list to see the details
+    </span>
+    <span *ngIf="totalRecipes === 0"> please add a new recipe </span>
+  </h2>
+  <div class="flex-1 flex justify-center items-center" *ngIf="totalRecipes > 4">
+    <mat-icon class="scale-[20] text-accent/20">fastfood</mat-icon>
+  </div>
+</section>
