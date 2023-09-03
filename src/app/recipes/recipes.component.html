@@ -1,4 +1,7 @@
-<main class="grid lg:grid-cols-[2fr,4fr] gap-6 mt-6 pb-6">
-  <app-recipes-list></app-recipes-list>
-  <app-recipe-details></app-recipe-details>
+<main class="grid lg:grid-cols-[2fr,4fr] gap-6 mt-6 pb-6 max-h-screen">
+  <app-recipes-list> </app-recipes-list>
+
+  <ng-component>
+    <router-outlet></router-outlet>
+  </ng-component>
 </main>

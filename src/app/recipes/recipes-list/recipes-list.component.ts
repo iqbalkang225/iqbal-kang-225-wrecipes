@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RecipesService } from 'src/app/recipes/recipes.service';
 import { Recipe } from '../recipe.model';
 
 @Component({
@@ -6,34 +7,16 @@ import { Recipe } from '../recipe.model';
   templateUrl: './recipes-list.component.html',
   styleUrls: ['./recipes-list.component.css'],
 })
-export class RecipesListComponent {
-  recipes: Recipe[] = [
-    new Recipe(
-      'lean ground turkey',
-      'Sit pariatur velit labore consequat sit ut.',
-      'https://www.harmonsgrocery.com/app/uploads/2020/09/Traditional_Turkey_Meal.jpg'
-    ),
-    new Recipe(
-      'lean ground turkey',
-      'Sit pariatur velit labore consequat sit ut.',
-      'https://www.harmonsgrocery.com/app/uploads/2020/09/Traditional_Turkey_Meal.jpg'
-    ),
-    new Recipe(
-      'lean ground turkey',
-      'Sit pariatur velit labore consequat sit ut.',
-      'https://www.harmonsgrocery.com/app/uploads/2020/09/Traditional_Turkey_Meal.jpg'
-    ),
-    new Recipe(
-      'lean ground turkey',
-      'Sit pariatur velit labore consequat sit ut.',
-      'https://www.harmonsgrocery.com/app/uploads/2020/09/Traditional_Turkey_Meal.jpg'
-    ),
-    new Recipe(
-      'lean ground turkey',
-      'Sit pariatur velit labore consequat sit ut.',
-      'https://www.harmonsgrocery.com/app/uploads/2020/09/Traditional_Turkey_Meal.jpg'
-    ),
-  ];
+export class RecipesListComponent implements OnInit {
+  recipes: Recipe[] = [];
 
-  constructor() {}
+  constructor(private recipesService: RecipesService) {}
+
+  ngOnInit(): void {
+    this.recipes = this.recipesService.getRecipes;
+
+    this.recipesService.recipiesChanged.subscribe((recipes: Recipe[]) => {
+      this.recipes = recipes;
+    });
+  }
 }
