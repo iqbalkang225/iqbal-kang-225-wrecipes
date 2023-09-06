@@ -87,6 +87,8 @@ export class RecipesService {
     ),
   ];
 
+  // private recipes: Recipe[];
+
   constructor(private router: Router) {}
 
   recipiesChanged = new Subject<Recipe[]>();
@@ -96,10 +98,6 @@ export class RecipesService {
   }
 
   getSingleRecipe(id: number) {
-    console.log(
-      this.recipes.find((recipe: Recipe) => recipe.getId === +id)
-        .getIngredients[0]
-    );
     return this.recipes.find((recipe: Recipe) => recipe.getId === +id);
   }
 
@@ -113,16 +111,16 @@ export class RecipesService {
 
   updateRecipe(index: number, recipe: Recipe) {
     const newRecipe = this.makeRecipeObject(recipe, index);
-
     this.recipes[index - 1] = newRecipe;
     this.recipiesChanged.next(this.getRecipes);
   }
 
   makeRecipeObject(recipe, id) {
-    const { name, image, description, ingredients } = recipe;
+    let { name, image, description, ingredients } = recipe;
+    if (!ingredients) ingredients = [];
 
     const ingredientsArr = this.makeIngredientsObject(ingredients);
-    return new Recipe(+id, name, description, image, ingredientsArr);
+    return new Recipe(id, name, description, image, ingredientsArr);
   }
 
   makeIngredientsObject(ingredients) {

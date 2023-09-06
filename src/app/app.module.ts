@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component';
 import { RecipesService } from './recipes/recipes.service';
 import { RecipeSelectComponent } from './recipes/recipe-select/recipe-select.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { RecipeSelectComponent } from './recipes/recipe-select/recipe-select.com
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [RecipesService],
   bootstrap: [AppComponent],

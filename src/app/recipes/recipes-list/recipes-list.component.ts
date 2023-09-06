@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { RecipesService } from 'src/app/recipes/recipes.service';
 import { Recipe } from '../recipe.model';
 
@@ -10,13 +11,14 @@ import { Recipe } from '../recipe.model';
 export class RecipesListComponent implements OnInit {
   recipes: Recipe[] = [];
 
-  constructor(private recipesService: RecipesService) {}
+  constructor(private recipesService: RecipesService, private router: Router) {}
 
   ngOnInit(): void {
     this.recipes = this.recipesService.getRecipes;
 
     this.recipesService.recipiesChanged.subscribe((recipes: Recipe[]) => {
       this.recipes = recipes;
+      this.router.navigate(['recipes', recipes.length]);
     });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpService } from 'src/app/shared/http.service';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { RecipesService } from '../recipes.service';
 
@@ -17,7 +18,8 @@ export class RecipeFormComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private recipesService: RecipesService
+    private recipesService: RecipesService,
+    private httpService: HttpService
   ) {}
 
   ngOnInit(): void {
@@ -80,7 +82,10 @@ export class RecipeFormComponent implements OnInit {
     const newRecipe = this.recipeForm.value;
 
     if (this.isEditing) this.recipesService.updateRecipe(this.id, newRecipe);
-    else this.recipesService.addRecipe(newRecipe);
+    else {
+      // this.recipesService.addRecipe(newRecipe);
+      this.httpService.saveDataInFirebase(newRecipe);
+    }
   }
 
   onCancel() {

@@ -24,6 +24,7 @@ export class ShoppingListService {
     ings.forEach((ing) => {
       this.checkIfIngredientPresentAndUpdate(ing);
     });
+    localStorage.setItem('ings', JSON.stringify(this.ingredients));
   }
 
   checkIfIngredientPresentAndUpdate(ing: Ingredient) {
