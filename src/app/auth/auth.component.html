@@ -1,0 +1,50 @@
+<form (ngSubmit)="onSubmit(form)" #form="ngForm" class="max-w-md mx-auto py-12">
+  <div class="space-y-8">
+    <input
+      type="text"
+      placeholder="Email"
+      class="border-b border-accent p-1 outline-none w-full"
+      ngModel
+      name="email"
+      required
+      email
+    />
+    <input
+      type="password"
+      placeholder="Password"
+      class="border-b border-accent p-1 outline-none w-full"
+      ngModel
+      name="password"
+      required
+      minlength="6"
+    />
+    <input
+      *ngIf="!alreadyMember"
+      type="password"
+      placeholder="Confirm password"
+      class="border-b border-accent p-1 outline-none w-full"
+      ngModel
+      name="confirmPassword"
+      required
+      minlength="6"
+    />
+    <!-- buttons -->
+
+    <button
+      [disabled]="!form.valid"
+      class="w-full border border-black py-4 flex gap-2 justify-center capitalize rounded-full hover:text-black hover:scale-95 duration-200 disabled:border-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed"
+    >
+      <mat-icon>login</mat-icon>
+      {{ alreadyMember ? "Login" : "Register" }}
+    </button>
+  </div>
+  <div class="text-center mt-2">
+    <p>
+      {{ alreadyMember ? "Not a member yet? " : "Already a member? " }}
+
+      <button class="text-blue-500 hover:underline" (click)="toggleAuthForm()">
+        {{ alreadyMember ? "Register" : "Login" }}
+      </button>
+    </p>
+  </div>
+</form>

@@ -19,6 +19,7 @@ import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component
 import { RecipesService } from './recipes/recipes.service';
 import { RecipeSelectComponent } from './recipes/recipe-select/recipe-select.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     ShoppingItemComponent,
     RecipeFormComponent,
     RecipeSelectComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
