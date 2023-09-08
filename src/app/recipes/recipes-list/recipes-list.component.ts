@@ -32,7 +32,7 @@ export class RecipesListComponent implements OnInit {
   onAddRecipe() {
     this.authService.user$.pipe(take(1)).subscribe((user) => {
       if (!user) return this.router.navigate(['/auth']);
-      // else this.router.navigate(['new'], { relativeTo: this.route });
+      else this.router.navigate(['new'], { relativeTo: this.route });
     });
   }
 }
