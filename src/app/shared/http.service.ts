@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { exhaustMap, map, take } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 import { Recipe } from '../recipes/recipe.model';
 import { RecipesService } from '../recipes/recipes.service';
 
@@ -17,15 +18,12 @@ const fireBaseUrl = (id?: string) => {
 export class HttpService {
   constructor(
     private recipesService: RecipesService,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   saveDataInFirebase(recipe: Recipe) {
-    this.http
-      .post<{ name: string }>(fireBaseUrl(), recipe)
-      .subscribe((data) => {
-        this.getDatafromFirebase(data.name);
-      });
+    return this.http.post<{ name: string }>(fireBaseUrl(), recipe);
   }
 
   getDatafromFirebase(name) {

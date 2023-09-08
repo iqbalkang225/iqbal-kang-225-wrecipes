@@ -51,7 +51,7 @@
   </a>
 
   <ul class="flex gap-12 justify-end capitalize">
-    <li>
+    <li *ngIf="!isAuthenticated">
       <a
         routerLink="auth"
         routerLinkActive="text-accent"
@@ -59,8 +59,14 @@
         >login</a
       >
     </li>
-    <li>
-      <a href="#">manage</a>
+    <li *ngIf="isAuthenticated">
+      <a
+        routerLink="auth"
+        routerLinkActive="text-accent"
+        class="hover:text-accent duration-200"
+        (click)="onLogout()"
+        >logout</a
+      >
     </li>
   </ul>
 </nav>

@@ -87,7 +87,7 @@ export class RecipesService {
     ),
   ];
 
-  // private recipes: Recipe[];
+  // private recipes: Recipe[] = [];
 
   constructor(private router: Router) {}
 

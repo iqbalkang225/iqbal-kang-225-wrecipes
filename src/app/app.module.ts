@@ -18,8 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component';
 import { RecipesService } from './recipes/recipes.service';
 import { RecipeSelectComponent } from './recipes/recipe-select/recipe-select.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthComponent } from './auth/auth.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,14 @@ import { AuthComponent } from './auth/auth.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [RecipesService],
+  providers: [
+    RecipesService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

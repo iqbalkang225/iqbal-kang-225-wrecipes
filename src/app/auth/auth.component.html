@@ -1,5 +1,11 @@
 <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="max-w-md mx-auto py-12">
   <div class="space-y-8">
+    <p
+      *ngIf="error"
+      class="bg-accent/80 text-white first-letter:capitalize p-2 rounded"
+    >
+      {{ error }}
+    </p>
     <input
       type="text"
       placeholder="Email"
@@ -28,6 +34,11 @@
       required
       minlength="6"
     />
+    <span
+      *ngIf="passwordMismatch && !alreadyMember"
+      class="text-accent text-sm mt-2"
+      >Passwords do not match</span
+    >
     <!-- buttons -->
 
     <button
@@ -42,7 +53,11 @@
     <p>
       {{ alreadyMember ? "Not a member yet? " : "Already a member? " }}
 
-      <button class="text-blue-500 hover:underline" (click)="toggleAuthForm()">
+      <button
+        type="button"
+        class="text-accent hover:underline"
+        (click)="toggleAuthForm()"
+      >
         {{ alreadyMember ? "Register" : "Login" }}
       </button>
     </p>
